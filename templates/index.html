@@ -34,9 +34,9 @@
           </div>
           <div class="container">
             <ul class="nav navbar-nav">
-              <li class="active"><a class="top_bar" href="/">Main</a></li>
-              <li><a class="top_bar" href="/contact/">Contacts</a></li>
-              <li><a class="top_bar" href="/student_list/">Students</a></li>
+              <li class="active"><a class="top_bar" href="{% url 'index' %}">Main</a></li>
+              <li><a class="top_bar" href="{% url 'contact' %}">Contacts</a></li>
+              <li><a class="top_bar" href="{% url 'student_list' %}">Students</a></li>
             </ul>
           </div>
         </div>
@@ -127,7 +127,7 @@
    
     <nav class="container">
       <ul class="pager">
-        <li class="next"><a href="/contact/">Contacts<span aria-hidden="true">&rarr;</span></a></li>
+        <li class="next"><a href="{% url 'contact' %}">Contacts<span aria-hidden="true">&rarr;</span></a></li>
       </ul>
     </nav>
     
