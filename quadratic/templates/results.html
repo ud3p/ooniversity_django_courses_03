@@ -54,11 +54,14 @@
 				
                 <ul class="my_list">
 					<li>a = {{ dictionary.a }}</li>
-					{% if error_message_a %}<p><strong>{{ error_message_a }}</strong></p>{% endif %}
+{% if error_mess1_a %}<p><strong>{{ error_mess1_a }}</strong></p>{% endif %}
+{% if error_mess2_a %}<p><strong>{{ error_mess2_a }}</strong></p>{% endif %}
 					<li>b = {{ dictionary.b }}</li>
-					{% if error_message_b %}<p><strong>{{ error_message_b }}</strong></p>{% endif %}
+{% if error_mess1_b %}<p><strong>{{ error_mess1_b }}</strong></p>{% endif %}
+{% if error_mess2_b %}<p><strong>{{ error_mess2_b }}</strong></p>{% endif %}
 					<li>c = {{ dictionary.c }}</li>
-					{% if error_message_c %}<p><strong>{{ error_message_c }}</strong></p>{% endif %}
+{% if error_mess1_c %}<p><strong>{{ error_mess1_c }}</strong></p>{% endif %}
+{% if error_mess2_c %}<p><strong>{{ error_mess2_c }}</strong></p>{% endif %}
 				</ul>
 				<p>{{ d }}</p>
 				<p>{{ discr }}</p>

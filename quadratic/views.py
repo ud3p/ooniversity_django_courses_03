@@ -13,31 +13,45 @@ def calculate(request):
 		return d
 	
 	r = request.GET
-	print r
+	
 	dictionary = {'a': r['a'], 'b': r['b'], 'c': r['c']}
 	error_mess1 = "коэффициент не целое число"
 	error_mess2 = "коэффициент не определен"
+	
 	try:
 		a = int(r['a'])
 		b = int(r['b'])
 		c = int(r['c'])
-		
-	except (ValueError, UnboundLocalError):
-		if dictionary['a'].isalpha():
-			return render(request, 'results.html', {'dictionary': dictionary, 'error_message_a': error_mess1})
-		elif dictionary['b'].isalpha():
-			return render(request, 'results.html', {'dictionary': dictionary, 'error_message_b': error_mess1})
-		elif dictionary['c'].isalpha():
-			return render(request, 'results.html', {'dictionary': dictionary, 'error_message_c': error_mess1})
-		elif dictionary['a']=='':
-			return render(request, 'results.html', {'dictionary': dictionary, 'error_message_a': error_mess2})
-		elif dictionary['b']=='':
-			return render(request, 'results.html', {'dictionary': dictionary, 'error_message_b': error_mess2})
-		elif dictionary['c']=='':
-			return render(request, 'results.html', {'dictionary': dictionary, 'error_message_c': error_mess2})
-	
-		
 
+	except ValueError:
+		discr = {'dictionary': dictionary}
+
+		if dictionary['a']=='':
+			error_mess2_a = {'error_mess2_a': error_mess2}
+			discr.update(error_mess2_a)
+		elif dictionary['b']=='':
+			error_mess2_b = {'error_mess2_b': error_mess2}
+			discr.update(error_mess2_b)
+		elif dictionary['c']=='':
+			error_mess2_c = {'error_mess2_c': error_mess2}
+			discr.update(error_mess2_c)
+			
+	
+		elif dictionary['a'].isalpha():
+			error_mess1_a = {'error_mess1_a': error_mess1}
+			discr.update(error_mess1_a)
+		elif dictionary['b'].isalpha():
+			error_mess1_b = {'error_mess1_b': error_mess1}
+			discr.update(error_mess1_b)
+		elif dictionary['c'].isalpha():
+			error_mess1_c = {'error_mess1_c': error_mess1}
+			discr.update(error_mess1_c)
+			
+		
+		#discr = {'error_mess2_a': error_mess2_a, 'error_mess2_b': error_mess2_b, 'error_mess2_c': error_mess2_c, 'error_mess1_a': error_mess1_a, 'error_mess1_b': error_mess1_b, 'error_mess1_c': error_mess1_c, 'dictionary': dictionary}
+		return render(request, 'results.html', discr)
+		
+		
 	
 
 	d = get_discr(a, b, c)
