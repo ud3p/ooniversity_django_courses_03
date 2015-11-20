@@ -31,7 +31,7 @@
             <li><a class="top_bar" href="{% url 'index' %}">Main</a></li>
             <li><a class="top_bar" href="{% url 'contact' %}">Contacts</a></li>
             <li><a class="top_bar" href="{% url 'student_list' %}">Students</a></li>
-			<!--<li class="active"><a class="top_bar" href="{% url 'results' %}">Equation</a></li>-->
+			<li class="active"><a class="top_bar" href="{% url 'calculate' %}">Equation</a></li>
           </ul>
         </div>
         </nav>
@@ -53,23 +53,24 @@
 				<h2>Квадратное уравнение a*x*x + b*x + c = 0</h2>
 				
                 <ul class="my_list">
-					<li>a = {{ dictionary.a }}</li>
+					<li>a = {{ a }}</li>
 {% if error_mess1_a %}<p><strong>{{ error_mess1_a }}</strong></p>{% endif %}
 {% if error_mess2_a %}<p><strong>{{ error_mess2_a }}</strong></p>{% endif %}
-					<li>b = {{ dictionary.b }}</li>
+{% if error_mess3_a %}<p><strong>{{ error_mess3_a }}</strong></p>{% endif %}
+					<li>b = {{ b }}</li>
 {% if error_mess1_b %}<p><strong>{{ error_mess1_b }}</strong></p>{% endif %}
 {% if error_mess2_b %}<p><strong>{{ error_mess2_b }}</strong></p>{% endif %}
-					<li>c = {{ dictionary.c }}</li>
+					<li>c = {{ c }}</li>
 {% if error_mess1_c %}<p><strong>{{ error_mess1_c }}</strong></p>{% endif %}
 {% if error_mess2_c %}<p><strong>{{ error_mess2_c }}</strong></p>{% endif %}
 				</ul>
 				<p>{{ d }}</p>
 				<p>{{ discr }}</p>
-				Введите параметры:
-				<form>
-				<input type="text" name='a' /><p>Insert "a"</p>
-				<input type="text" name='b' /><p>Insert "b"</p>
-				<input type="text" name='c' /><p>Insert "c"</p>
+				<p>Введите параметры:</p>
+				<form action="{% url 'results' %}">
+				<input type="text" name='a' /><p>Введите "a" &uArr;</p>
+				<input type="text" name='b' /><p>Введите "b" &uArr;</p>
+				<input type="text" name='c' /><p>Введите "c" &uArr;</p>
 				<input type="submit"/>
 				</p>
 				

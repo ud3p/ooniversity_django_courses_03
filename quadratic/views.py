@@ -2,11 +2,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-
-def quadratic_results(request):
+def calculate(request):
 	return render(request, 'results.html')
 
-def calculate(request):
+def quadratic_results(request):
 	yravnenie = "Квадратное уравнение a*x*x + b*x + c = 0"
 	def get_discr(a, b, c):
 		d = b**2 - 4*a*c
@@ -14,116 +13,57 @@ def calculate(request):
 	
 	r = request.GET
 	
-	dictionary = {'a': r['a'], 'b': r['b'], 'c': r['c']}
+	dictionary = {'a': str(r['a']), 'b': str(r['b']), 'c': str(r['c'])}
+
 	error_mess1 = "коэффициент не целое число"
 	error_mess2 = "коэффициент не определен"
+	error_mess3 = "коэффициент при первом слагаемом уравнения не может быть равным нулю"
 	
 	try:
-		a = int(r['a'])
-		b = int(r['b'])
-		c = int(r['c'])
+		a = int(dictionary['a'])
+		b = int(dictionary['b'])
+		c = int(dictionary['c'])
+		d = get_discr(a, b, c)
+		outp_d = {'d': "Дискриминант: %s" %d}
+		
+		if a == 0:
+			error_mess3_a = {'error_mess3_a': error_mess3}
+			dictionary.update(error_mess3_a)
+			return render(request, 'results.html', dictionary)
+
+		if d < 0:
+			dictionary['discr'] = "Дискриминант меньше нуля, квадратное уравнение не имеет действительных решений."
+			dictionary.update(outp_d)
+			return render(request, 'results.html', dictionary)
+
+		elif d == 0:
+			x = -b / 2*a
+			dictionary['discr'] = "Дискриминант равен нулю, квадратное уравнение имеет один действительный корень: x1 = x2 = %s" % float(x)
+			dictionary.update(outp_d)
+			return render(request, 'results.html', dictionary)
+
+		else:
+			x1 = (-b + d**(1/2.0)) / 2*a
+			x2 = (-b - d**(1/2.0)) / 2*a
+			dictionary['discr'] = "Квадратное уравнение имеет два действительных корня: x1 = %s x2 = %s" % (float(x1), float(x2))
+			dictionary.update(outp_d)
+			return render(request, 'results.html', dictionary)
+		
 
 	except ValueError:
-		discr = {'dictionary': dictionary}
+		if dictionary['a'].isalpha():
+			dictionary['error_mess1_a'] = error_mess1
+        if dictionary['b'].isalpha():
+            dictionary['error_mess1_b'] = error_mess1
+        if dictionary['c'].isalpha():
+            dictionary['error_mess1_c'] = error_mess1
 
-		if dictionary['a']=='':
-			error_mess2_a = {'error_mess2_a': error_mess2}
-			discr.update(error_mess2_a)
-		elif dictionary['b']=='':
-			error_mess2_b = {'error_mess2_b': error_mess2}
-			discr.update(error_mess2_b)
-		elif dictionary['c']=='':
-			error_mess2_c = {'error_mess2_c': error_mess2}
-			discr.update(error_mess2_c)
-			
-	
-		elif dictionary['a'].isalpha():
-			error_mess1_a = {'error_mess1_a': error_mess1}
-			discr.update(error_mess1_a)
-		elif dictionary['b'].isalpha():
-			error_mess1_b = {'error_mess1_b': error_mess1}
-			discr.update(error_mess1_b)
-		elif dictionary['c'].isalpha():
-			error_mess1_c = {'error_mess1_c': error_mess1}
-			discr.update(error_mess1_c)
-			
-		
-		#discr = {'error_mess2_a': error_mess2_a, 'error_mess2_b': error_mess2_b, 'error_mess2_c': error_mess2_c, 'error_mess1_a': error_mess1_a, 'error_mess1_b': error_mess1_b, 'error_mess1_c': error_mess1_c, 'dictionary': dictionary}
-		return render(request, 'results.html', discr)
-		
-		
-	
+        if dictionary['a']=='':
+            dictionary['error_mess2_a'] = error_mess2
+        if dictionary['b']=='':
+            dictionary['error_mess2_b'] = error_mess2
+        if dictionary['c']=='':
+            dictionary['error_mess2_c'] = error_mess2
 
-	d = get_discr(a, b, c)
-	outp_d = "Дискриминант: %s" %d
-	if d < 0:
-		outp = "Дискриминант меньше нуля, квадратное уравнение не имеет действительных решений."
-		discr = {'discr': outp, 'd': outp_d, 'dictionary': dictionary}
-		return render(request, 'results.html', discr)
-	
-	elif d == 0:
-		x = -b / 2*a
-		outp = "Дискриминант равен нулю, квадратное уравнение имеет один действительный корень: x1 = x2 = %s" % float(x)
-		discr = {'discr': outp, 'd': outp_d, 'dictionary': dictionary}
-		return render(request, 'results.html', discr)
-
-	else:
-		x1 = (-b + d**(1/2.0)) / 2*a
-		x2 = (-b - d**(1/2.0)) / 2*a
-		outp = "Квадратное уравнение имеет два действительных корня: x1 = %s x2 = %s" % (float(x1), float(x2))
-		discr = {'discr': outp, 'd': outp_d, 'dictionary': dictionary}
-		return render(request, 'results.html', discr)
-	
-	
-    
-
-
-
-
-
-
-
-
-'''
-def calculete(request):
-	def get_discr(a, b, c):
-		d = b**2 - 4*a*c
-		return d
-
-	def get_eq_root(a, b, d, order=1):
-		if order==1:
-			x = (-b + d**(1/2.0)) / 2*a
-		else:
-			x = (-b - d**(1/2.0)) / 2*a
-		return x
-	
-	def input_parameter(parameter_name='a'):
-		while True:
-			p = raw_input("Enter the parameter: %s = " % parameter_name)
-			if p.replace('.', '').replace('-', '').isdigit() and float(p) != 0:
-				return float(p)
-			else:
-				print "Please enter the number of nonzero"
-	
-	#return HttpResponse("Hello")
-	a = int(request.GET['a'])
-	b = int(request.GET['b'])
-	c = int(request.GET['c'])
-
-	d = get_discr(a, b, c)
-
-	if d < 0:
-		print u"Дискриминант меньше нуля, квадратное уравнение не имеет действительных решений."
-		outp1 = u"Дискриминант меньше нуля, квадратное уравнение не имеет действительных решений."
-		return outp1
-	
-	elif d == 0:
-		x = -b / 2*a
-		print u"Дискриминант равен нулю, квадратное уравнение имеет один действительный корень:"
-
-	else:
-		get_eq_root(a, b, d)
-		print u"Квадратное уравнение имеет два действительных корня:"
-		print a
-'''
+        return render(request, 'results.html', dictionary)
 
