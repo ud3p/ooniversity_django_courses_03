@@ -1,8 +1,8 @@
 from django.conf.urls import patterns, url
-
+from courses.models import Course
 from courses import views
 
 urlpatterns = patterns('',
-    url(r'^$', views.courses, name='courses'),
-    
+    url(r'^(?P<course_id>\d+)/$', views.detail, name='detail'),
+  
 )
