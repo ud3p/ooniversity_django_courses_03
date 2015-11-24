@@ -5,4 +5,7 @@ from django.http import HttpResponse
 
 def courses(request):
 	cour = Course.objects.all()
-	return HttpResponse(cour)
+	a = cour[0]
+	b = a.short_description
+	return HttpResponse(b)
+

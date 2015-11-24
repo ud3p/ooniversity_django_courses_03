@@ -13,5 +13,5 @@ urlpatterns = patterns('',
 	url(r'^student_detail/$', student_detail, name='student_detail'),
 	url(r'^quadratic/results/$', quadratic_results, name='results'),
 	url(r'^quadratic/$', calculate, name='calculate'),
-	url(r'^course/$', courses, name='courses'),
+	url(r'^course/$', include('courses.urls')),
 )
