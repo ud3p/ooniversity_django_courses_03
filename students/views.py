@@ -14,11 +14,11 @@ def list_view(request):
 	return render(request, 'students/list.html', {'students': stud})
 
 def detail(request, detail_id):
-	stud = Student.objects.get(id = detail_id)
+	#stud = Student.objects.get(id = detail_id)
 	
 	#cour = Course.objects.get(id=course_id)
 	#lesn = Lesson.objects.filter(course=course_id)
-	return render(request, 'students/detail.html', {'student': stud})
+	return render(request, 'students/detail.html', {'student': Student.objects.get(id = detail_id)})
 
 
 
