@@ -70,7 +70,7 @@
                     {% for i in students %}
                     <tr>
                     <td>{{ i.id }}</td>
-					<td>{{ i.surname }} {{ i.name }}</td>
+					<td><a href="{% url 'students:detail' i.id %}">{{ i.surname }} {{ i.name }}</a></td>
 					<td>{{ i.address }}</td>
 					<td>{{ i.skype }}</td>
 					<td>{% for k in students.courses.all %}{{ k.name }}<br>{%endfor%}</td>
@@ -85,6 +85,7 @@
         </div>
 
       </div>
+
     </div>    
     
     <nav class="container">
