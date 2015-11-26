@@ -50,7 +50,12 @@
       <div class="page-header">
       	<h1 class="top1">{{ coach.first_name }} {{ coach.last_name }}</h1>
 		<div class="jumbotron">
-
+			<div class="coach_img">
+			{% if coach.gender == "M"  %}
+			<img src="{% static 'images/top2.png' %}" alt="..." class="img-circle">
+			{% else %}
+			<img src="{% static 'images/top1.png' %}" alt="..." class="img-circle">	{% endif %}
+			</div>
 			<div class="panel panel-default">
                   <!-- Default panel contents -->
                   
@@ -84,16 +89,17 @@
 					<a class="top_bar" href="{% url 'students:list_view' %}?course_id={{ i.id }}">
 					<span class="glyphicon glyphicon-education" aria-hidden="true"></span>
 					</a>
-					<br>{%endfor%}</td>
+					<br>{% endfor %}</td>
 					
 					</tr>
 					<tr>
-					<td>Ассистент на курсах</td><td>{% for k in assist %}
+					<td>Ассистент на курсах</td><td>
+					{% for k in assist %}
 					<a href="{% url 'courses:detail' k.id %}">{{ k.name }}</a> 						студенты курса 
 					<a class="top_bar" href="{% url 'students:list_view' %}?course_id={{ k.id }}">
 					<span class="glyphicon glyphicon-education" aria-hidden="true"></span>
 					</a>
-					<br>{%endfor%}</td>
+					<br>{% endfor %}</td>
 					
 					</tr>
 					
