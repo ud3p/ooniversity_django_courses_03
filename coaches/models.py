@@ -1,5 +1,7 @@
 from django.db import models
+from django.contrib import admin
 from django.contrib.auth.models import User
+
 
 class Coach(models.Model):
 	user = models.OneToOneField(User)
@@ -12,12 +14,13 @@ class Coach(models.Model):
 
 	def __unicode__(self):
 		return self.user.username
-	
+
 	def first_name(self):
 		return self.user.first_name
 
 	def last_name(self):
 		return self.user.last_name
-	
+'''
 	def is_staff(self):
 		return self.user.is_staff
+'''
