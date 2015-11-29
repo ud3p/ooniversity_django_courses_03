@@ -45,38 +45,32 @@
       <div class="page-header">
         <h1 class="top1">Equation</h1>
         <div class="jumbotron">
-          <div class="row">
-
-          <div class="col-md-4 about_me">
-            
-              <div class="caption">
+          
 				<h2>Квадратное уравнение a*x*x + b*x + c = 0</h2>
 				
                 <ul class="my_list">
 					<li>a = {{ a }}</li>
 {% if error_mess_a %}<p><strong>{{ error_mess_a }}</strong></p>{% endif %}
-{% if error_mess3_a %}<p><strong>{{ error_mess3_a }}</strong></p>{% endif %}
+{# {% if error_mess3_a %}<p><strong>{{ error_mess3_a }}</strong></p>{% endif %} #}
 					<li>b = {{ b }}</li>
 {% if error_mess_b %}<p><strong>{{ error_mess_b }}</strong></p>{% endif %}
 					<li>c = {{ c }}</li>
 {% if error_mess_c %}<p><strong>{{ error_mess_c }}</strong></p>{% endif %}
 
 				</ul>
-				<p>{{ d }}</p>
-				<p>{{ discr }}</p>
+				{% if not error %}
+				<p>Дискриминант: {{ d }}</p>
+				<p>{{ result_message }}</p>
 				<p>Введите параметры:</p>
+				{% endif %}
 				<form action="{% url 'results' %}">
-				<input type="text" name='a' /><p>Введите "a" &uArr;</p>
-				<input type="text" name='b' /><p>Введите "b" &uArr;</p>
-				<input type="text" name='c' /><p>Введите "c" &uArr;</p>
+				{{ form.as_p }}
 				<input type="submit"/>
-				</p>
+				</form>
 				
 
                 
-              </div>
-          </div>
-          </div>
+             
 
       </div>
     </div>

@@ -32,11 +32,11 @@
 				<!-- Вариант для проверялки -->
               <li class="{% block index_is_active %}{% endblock %}">
 				<a href="{% url 'index' %}">Main</a></li>
-              <li class="{% block index_is_contact %}{% endblock %}">
+              <li class="{% block contact_is_active %}{% endblock %}">
 				<a href="{% url 'contact' %}">Contacts</a></li>
-              <li class="{% block index_is_students %}{% endblock %}">
+              <li class="{% block students_is_active %}{% endblock %}">
 				<a href="{% url 'students:list_view' %}">Students</a></li>
-			  <li class="{% block index_is_calculate %}{% endblock %}">
+			  <li class="{% block calculate_is_active %}{% endblock %}">
 				<a href="{% url 'calculate' %}">Equation</a></li>
 			  <!-- Оригинал -->
 				<!--<li class="active"><a class="top_bar" href="{% url 'index' %}">Main</a></li>
