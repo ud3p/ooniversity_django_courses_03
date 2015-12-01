@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+{% block title %}Contacts{% endblock title %}
+
+
+{% block contact_is_active %}active{% endblock %}
+
+
+{% block body_class %}{% endblock body_class %}
+
+
+{% block content %}
+	<div class="container">
+		<div class="page-header">
+			<h1 class="conts">Contacts</h1>
+			<div class="jumbotron">
+				<div class="row">
+					<div class="col-md-4">
+						<img src="{% static 'images/dir2.png' %}" alt="..." class="img-circle">
+						<div class="caption">
+							<h2 class="dolgnosti">Director:</h2>
+							<p>
+								<span class="spa">Name:</span> Svidetel</br>
+								<span class="spa">Skype:</span> svidetel</br>
+								<span class="spa">Email:</span> svidetel@gmail.com</br>
+								<span class="spa">Phone:</span> 8-800-555-35-35</br>
+							</p>
+							<div>
+								<a href="#" class="btn btn-primary" role="button">Send email</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-4">
+						<img src="{% static 'images/brian.png' %}" alt="..." class="img-circle">
+						<div class="caption">
+							<h2 class="dolgnosti">Manager:</h2>
+							<p>
+								<span class="spa">Name:</span> Brian</br>
+								<span class="spa">Skype:</span> brian</br>
+								<span class="spa">Email:</span> brian@gmail.com</br>
+								<span class="spa">Phone:</span> 8-800-555-35-35</br>
+							</p>
+							<div>
+								<a href="#" class="btn btn-primary" role="button">Send email</a>
+							</div>
+						</div>
+					</div>
+           
+					<div class="col-md-4">
+						<img src="{% static 'images/mad_fox2.png' %}" alt="..." class="img-circle">
+						<div class="caption">
+							<h2 class="dolgnosti">Founder:</h2>
+							<p>
+								<span class="spa">Name:</span> Mad Fox</br>
+								<span class="spa">Skype:</span> mad_fox</br>
+								<span class="spa">Email:</span> mad_fox@gmail.com</br>
+								<span class="spa">Phone:</span> 8-800-555-35-35</br>
+							</p>
+							<div>
+								<a href="#" class="btn btn-primary" role="button">Send email</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% block next %}{% endblock next %}
+{% endblock content %} 
