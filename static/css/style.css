@@ -80,7 +80,10 @@
 	padding-bottom: 20px;
 }
 
-
+.background_body {
+    background-image: url("../images/background.png");
+    		
+}
 
 
 /* TABLE
@@ -129,10 +132,11 @@ table tbody tr th{
 	
 	*/
 }
+
 table tbody tr td{
 	vertical-align:middle;
 	border:#bdbdbd 1px solid;
-	font-weight: bold;
+/*	font-weight: bold;*/
 	font-size: 12pt;
 	/*
 	border-collapse:collapse;

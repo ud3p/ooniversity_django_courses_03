@@ -5,54 +5,47 @@
 {% block title %}{{ student.surname }} {{ student.name }}{% endblock title %}
 
 
+{% block students_is_active %}active{% endblock %}
+
+
 {% block carousel %}{% endblock carousel %}
 
 
 {% block content %}   
 	<div class="container students">
-      <div class="page-header">
-      	<h1 class="top1">{{ student.surname }} {{ student.name }}</h1>
-		<div class="jumbotron">
-
-			<div class="panel panel-default">
-                  <!-- Default panel contents -->
-                  <!-- Table -->
-                  <table class="table">
-                    <tbody>
-                    <tr>
-                    <td>Дата рождения</td><td>{{ student.date_of_birth }}</td>
-					</tr>
-					<tr>
-					<tr>
-					<td>Адрес</td><td>{{ student.address }}</td>
-					</tr>
-					<tr>
-					<td>Почта</td><td>{{ student.email }}</td>
-					</tr>
-					<tr>
-					<td>Skype</td><td>{{ student.skype }}</td>
-					</tr>
-					<tr>
-					<td>Телефон</td><td>{{ student.phone }}</td>
-					</tr>
-					<tr>
-					<td>Курсы</td><td>{% for k in student.courses.all %}<a href="{% url 'courses:detail' k.id %}">{{ k.name }}</a><br>{% endfor %}</td>
-					</tr>
-                    </tbody>
-                  </table>
-
-          </div>
-
+    <div class="page-header">
+      <h1 class="top1">{{ student.surname }} {{ student.name }}</h1>
+			<div class="jumbotron">
+				<div class="panel panel-default">
+          <!-- Default panel contents -->
+          <!-- Table -->
+        	<table class="table">
+            <tbody>
+              <tr>
+                <td>Дата рождения</td><td>{{ student.date_of_birth }}</td>
+							</tr>
+							<tr>
+								<td>Адрес</td><td>{{ student.address }}</td>
+							</tr>
+							<tr>
+								<td>Почта</td><td>{{ student.email }}</td>
+							</tr>
+							<tr>
+								<td>Skype</td><td>{{ student.skype }}</td>
+							</tr>
+							<tr>
+								<td>Телефон</td><td>{{ student.phone }}</td>
+							</tr>
+							<tr>
+								<td>Курсы</td><td>{% for k in student.courses.all %}
+								<a href="{% url 'courses:detail' k.id %}">{{ k.name }}</a><br>
+								{% endfor %}
+								</td>
+							</tr>
+            </tbody>
+          </table>
         </div>
-
       </div>
-
-    </div>    
-    
-    <nav class="container">
-    <ul class="pager">
-      <li class="previous"><a href="{% url 'contact' %}"><span aria-hidden="true">&larr;</span>Сontacts</a></li>
-      
-    </ul>
-    </nav>
+    </div>
+  </div>    
 {% endblock content %} 

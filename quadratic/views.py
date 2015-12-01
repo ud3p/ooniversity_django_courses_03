@@ -77,7 +77,7 @@ def quadratic_results(request):
 			x2 = get_eq_root(a, b, d, order=2)
 			result_message = "Квадратное уравнение имеет два действительных корня: x1 = {}, x2 = {}" .format(x1, x2)
 		
-		context.update({'d': d, 'result_message': result_message})
+		context.update({'d': 'Дискриминант: %d' %d, 'result_message': result_message})
 	context['form'] = form
 	return render(request, 'results.html', context)
 

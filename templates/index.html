@@ -7,66 +7,54 @@
 
 
 {% block content %}
-<div class="container">
-      <div class="page-header">
-        <h1 class="descr">Description: Проффесиональные Python курсы от PyBursa</h1>
-        <div class="jumbotron">
-          <p class="deviz">Запишись на курсы Python</br>
-          Попади в тренд современной</br>
-          WEB разработки
-          </p>
-          <p>Наибольшей проблемой всех учебников и статей, по которым начинают
-            изучать <span class="py">Python</span> - это отсутствие практики с освоенным материалом.</br>
-            Можно читать тонны ресурсов по веб-программированию на <span class="py">Python</span> - и
-            не научиться ничему, потому что знания, которые вы не успели применить,
-            очень быстро забываются.</br>
-            Многие начинающие сдаются на полпути, так как устают, им надоедает 
-            бесконечное блуждание по сети в поисках крупиц информации, из которых
-            трудно собрать общую картину.
-          </p>
-          <p>Мы предлагаем современные подходы к обучению! У нас Вы научитесь всему что понадобится для успешного старта карьеры в IT!</p>
-		
-        </div>
-      </div>
-    </div>
-      
-    <div class="container">
-      <div class="page-header">
-        <h1 class="descr">Program</h1>
-        <div class="jumbotron">
-          <p>Курсы будут проходить с 19 октября по 28 декабря.</br>
-          Практические занятия в аудитории + онлайн лекции.</p>
-          <p>Вы узнаете очень много нового о Веб-разработке! Создадите собственный проект, которым Вы будете гордиться!</p>
-			<div class="panel panel-default">
-                  <!-- Default panel contents -->
-                  
-                  <!-- Table -->
-                  <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <th>Курс</th>
-                        <th>Описание</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-					{% for i in course %}
-                    <tr>
-                    <td><a href="{% url 'courses:detail' i.id %}">{{ i }}</a></td>
-					<td>{{ i.short_description }}</td>
-					</tr>
-					{% endfor %}
-                    </tbody>
-                  </table>
+	<div class="container">
+		<div class="page-header">
+			<h1 class="descr">Description: Проффесиональные Python курсы от PyBursa</h1>
+			<div class="jumbotron">
+				<p class="deviz">Запишись на курсы Python</br>
+				Попади в тренд современной</br>
+				WEB разработки</p>
+				<p>Наибольшей проблемой всех учебников и статей, по которым начинают изучать
+				<span class="py">Python</span> - это отсутствие практики с освоенным материалом.</br>
+				Можно читать тонны ресурсов по веб-программированию на <span class="py">Python</span> 				- и не научиться ничему, потому что знания, которые вы не успели применить, очень 				быстро забываются.</br>
+				Многие начинающие сдаются на полпути, так как устают, им надоедает бесконечное 				
+				блуждание по сети в поисках крупиц информации, из которых трудно собрать общую
+				картину.</p>
+				<p>Мы предлагаем современные подходы к обучению! У нас Вы научитесь всему что 				
+				понадобится для успешного старта карьеры в IT!</p>
+			</div>
+		</div>
+	</div>
 
-          </div>
-
-        </div>
-      </div>
-    </div> 
-<nav class="container">
-      <ul class="pager">
-        <li class="next"><a href="{% url 'contact' %}">Contacts<span aria-hidden="true">&rarr;</span></a></li>
-      </ul>
-    </nav>
-
+	<div class="container">
+		<div class="page-header">
+			<h1 class="descr">Program</h1>
+			<div class="jumbotron">
+				<p>Курсы будут проходить с 19 октября по 28 декабря.</br>
+				Практические занятия в аудитории + онлайн лекции.</p>
+				<p>Вы узнаете очень много нового о Веб-разработке! Создадите собственный проект, 					которым Вы будете гордиться!</p>
+				<div class="panel panel-default">
+					<!-- Default panel contents -->
+					<!-- Table -->
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Курс</th>
+								<th>Описание</th>
+							</tr>
+						</thead>
+						<tbody>
+						{% for i in course %}
+							<tr>
+								<td><a href="{% url 'courses:detail' i.id %}">{{ i }}</a></td>
+								<td>{{ i.short_description }}</td>
+							</tr>
+						{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div> 
+{% block previous %}{% endblock previous %}	
 {% endblock content %} 
