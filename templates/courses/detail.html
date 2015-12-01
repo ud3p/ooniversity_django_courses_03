@@ -5,6 +5,9 @@
 {% block title %}{{ course.name }} course{% endblock title %}
 
 
+{% block link_to_st %}?course_id={{ course.id }}{% endblock link_to_st %}
+
+
 {% block carousel %}{% endblock carousel %}
 
 
@@ -14,68 +17,18 @@
     <div class="page-header">
       <h1 class="descr">{{ course.name }}</h1>
       <div class="jumbotron">
-        <h3>{{ course.description }}</h3>
+        <h3>{{ course.description|truncatechars:32 }}</h3>
       </div>
  		  <hr>
 		  <h1 class="descr">Преподаватели</h1>
 		  <hr>
-			<div class="panel panel-default">
-      	<table class="table">
-          <thead>
-          	<tr>
-							<th>Учитель</th>
-            </tr>
-          </thead>
-          <tbody>
-          	<tr>
-              <td>
-								<div class="coach_img">
-									{% if course.coach.gender == "M"  %}
-									<img src="{% static 'images/top2.png' %}" alt="..." class="img-circle">
-									{% else %}
-									<img src="{% static 'images/top1.png' %}" alt="..." class="img-circle">
-									{% endif %}
-								</div>
-								<p>
-									<a href="{% url 'coaches:detail' course.coach.id %}">
-									{{ course.coach.first_name }} {{ course.coach.last_name }}
-									</a>
-								</p>
-								<p>{{ course.coach.description }}</p>
-							</td>
-						</tr>
-          </tbody>
-        </table>
-			</div>
+
+
+{% include "courses/include/inc_about.html" with block_title="Учитель" instructor=course.coach %}
 			
-			<div class="panel panel-default">
-      	<table class="table">
-          <thead>
-          	<tr>
-							<th>Ассистент</th>
-            </tr>
-          </thead>
-          <tbody>
-          	<tr>
-              <td>
-								<div class="coach_img">
-									{% if course.assistant.gender == "M"  %}
-									<img src="{% static 'images/top2.png' %}" alt="..." class="img-circle">
-									{% else %}
-									<img src="{% static 'images/top1.png' %}" alt="..." class="img-circle">
-									{% endif %}
-								</div>
-								<p>
-									<a href="{% url 'coaches:detail' course.coach.id %}">
-									{{ course.assistant.first_name }} {{ course.assistant.last_name }}
-									</a>
-								</p>
-								<p>{{ course.assistant.description }}</p>
-							</td>
-						</tr>
-          </tbody>
-        </table>
-			</div>
+
+{% include "courses/include/inc_about.html" with block_title="Ассистент" instructor=course.assistant %}
+		
 
 			<hr>
 			<h1 class="descr">План курса</h1>
@@ -93,11 +46,11 @@
 		          </tr>
 		        </thead>
 		        <tbody>
-							{% for i in course.lesson_set.all %}
+							{% for course in course.lesson_set.all %}
 		          <tr>
-		            <td>{{ i.order }}</td>
-								<td>{{ i.subject }}</td>
-								<td>{{ i.description|linebreaksbr }}</td>
+		            <td>{{ course.order }}</td>
+								<td>{{ course.subject }}</td>
+								<td>{{ course.description|linebreaksbr }}</td>
 							</tr>
 							{% endfor %}
 					

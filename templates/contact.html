@@ -17,56 +17,16 @@
 			<h1 class="conts">Contacts</h1>
 			<div class="jumbotron">
 				<div class="row">
-					<div class="col-md-4">
-						<img src="{% static 'images/dir2.png' %}" alt="..." class="img-circle">
-						<div class="caption">
-							<h2 class="dolgnosti">Director:</h2>
-							<p>
-								<span class="spa">Name:</span> Svidetel</br>
-								<span class="spa">Skype:</span> svidetel</br>
-								<span class="spa">Email:</span> svidetel@gmail.com</br>
-								<span class="spa">Phone:</span> 8-800-555-35-35</br>
-							</p>
-							<div>
-								<a href="#" class="btn btn-primary" role="button">Send email</a>
-							</div>
-						</div>
-					</div>
 
-					<div class="col-md-4">
-						<img src="{% static 'images/brian.png' %}" alt="..." class="img-circle">
-						<div class="caption">
-							<h2 class="dolgnosti">Manager:</h2>
-							<p>
-								<span class="spa">Name:</span> Brian</br>
-								<span class="spa">Skype:</span> brian</br>
-								<span class="spa">Email:</span> brian@gmail.com</br>
-								<span class="spa">Phone:</span> 8-800-555-35-35</br>
-							</p>
-							<div>
-								<a href="#" class="btn btn-primary" role="button">Send email</a>
-							</div>
-						</div>
-					</div>
-           
-					<div class="col-md-4">
-						<img src="{% static 'images/mad_fox2.png' %}" alt="..." class="img-circle">
-						<div class="caption">
-							<h2 class="dolgnosti">Founder:</h2>
-							<p>
-								<span class="spa">Name:</span> Mad Fox</br>
-								<span class="spa">Skype:</span> mad_fox</br>
-								<span class="spa">Email:</span> mad_fox@gmail.com</br>
-								<span class="spa">Phone:</span> 8-800-555-35-35</br>
-							</p>
-							<div>
-								<a href="#" class="btn btn-primary" role="button">Send email</a>
-							</div>
-						</div>
-					</div>
+			    {% include "include/inc_contact.html" with block_image="images/dir.png" block_title="Director:" block_name="Svidetel" block_skype="svidetel" block_email="svidetel@gmail.com" block_phone="8-800-555-35-35"%}
+          
+          {% include "include/inc_contact.html" with block_image="images/brian.png" block_title="Manager:" block_name="Brian" block_skype="brian" block_email="brian@gmail.com" block_phone="8-800-555-35-35"%}
+
+          {% include "include/inc_contact.html" with block_image="images/mad_fox.png" block_title="Founder:" block_name="Mad Fox" block_skype="mad_fox" block_email="madfox@gmail.com" block_phone="8-800-555-35-35"%}
+					
 				</div>
 			</div>
 		</div>
 	</div>
+{% endblock content %}
 {% block next %}{% endblock next %}
-{% endblock content %} 

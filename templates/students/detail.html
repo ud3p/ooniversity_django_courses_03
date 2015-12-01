@@ -1,14 +1,8 @@
-{% extends "base.html" %}
+{% extends "students/base.html" %}
 {% load staticfiles %}
 
 
 {% block title %}{{ student.surname }} {{ student.name }}{% endblock title %}
-
-
-{% block students_is_active %}active{% endblock %}
-
-
-{% block carousel %}{% endblock carousel %}
 
 
 {% block content %}
@@ -16,13 +10,14 @@
     <div class="page-header">
       <h1 class="top1">{{ student.surname }} {{ student.name }}</h1>
 			<div class="jumbotron">
+        <h2 class="dolgnosti">О cтуденте:</h2>
 				<div class="panel panel-default">
           <!-- Default panel contents -->
           <!-- Table -->
         	<table class="table">
             <tbody>
               <tr>
-                <td>Дата рождения</td><td>{{ student.date_of_birth }}</td>
+                <td>Дата рождения</td><td>{{ student.date_of_birth|date:"d F, Y" }}</td>
 							</tr>
 							<tr>
 								<td>Адрес</td><td>{{ student.address }}</td>
@@ -37,8 +32,8 @@
 								<td>Телефон</td><td>{{ student.phone }}</td>
 							</tr>
 							<tr>
-								<td>Курсы</td><td>{% for k in student.courses.all %}
-								<a href="{% url 'courses:detail' k.id %}">{{ k.name }}</a><br>
+								<td>Курсы</td><td>{% for student in student.courses.all %}
+								<a href="{% url 'courses:detail' student.id %}">{{ student.name }}</a><br>
 								{% endfor %}
 								</td>
 							</tr>
@@ -48,5 +43,4 @@
       </div>
     </div>
   </div>   
-{% endblock content %} 
-
+{% endblock content %}

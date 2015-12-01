@@ -4,37 +4,13 @@ from students.models import Student, CourseApplication
 from courses.models import Course, Lesson
 from django import forms
 from django.contrib import messages
-from students.forms import StudentModelForm
 
-def student_model(request):
-	if request.method == 'POST':
-		form = StudentModelForm(request.POST)
-		if form.is_valid():
-			application = form.save()
-			mess = 'Student {} {} has been successfully added.' .format(application.surname, application.name)
-			messages.success(request, mess)
-			return redirect('..')
-	else:
-		form = StudentModelForm()
-	return render(request, 'students/add.html', {'form': form})
-
-class StudentApplyForm(forms.Form):
-	name = forms.CharField(max_length=100)
-	email = forms.EmailField()
-	package = forms.ChoiceField(choices=(
-		('standart', 'Standart'),
-		('gold', 'Gold'),
-		('vip', 'VIP')),
-		widget=forms.RadioSelect)
-	subscribe = forms.BooleanField(required=False)
-
-
-class CourseApplicationForm(forms.ModelForm):
+class StudentModelForm(forms.ModelForm):
 	class Meta:
-		model = CourseApplication
-		exclude = ['comment', 'is_active']
-		widgets = {'package': forms.RadioSelect}
-
+		model = Student
+		#exclude = ['comment', 'is_active']
+		#widgets = {'package': forms.RadioSelect}
+'''
 def list_view(request):
 	if request.GET.get('course_id'):
 		stud = Student.objects.filter(courses = request.GET.get('course_id'))
@@ -56,7 +32,8 @@ def apply_to_course(request):
 		form = CourseApplicationForm(request.POST)
 		if form.is_valid():
 			application = form.save()
-			'''
+'''
+'''
 			data = form.cleaned_data
 			application = CourseApplication()
 			application.name = data['name']
@@ -66,7 +43,8 @@ def apply_to_course(request):
 			course = Course.objects.get(id=1)
 			application.course = course
 			application.save()
-			'''			
+'''	
+'''		
 			messages.success(request, 'Form saved!!!')
 			return redirect('students:apply')
 	else:
@@ -94,6 +72,6 @@ def delete_application(request, pk):
 		messages.success(request, 'Object deleted!!!')
 		return redirect('students:apply')
 	return render(request, 'students/delete_application.html')
-
+'''
 
 

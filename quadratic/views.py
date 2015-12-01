@@ -1,17 +1,11 @@
 # -*- coding: utf-8 -*- 
 from django.shortcuts import render
-from django import forms
-
-class QuadraticForm(forms.Form):
-	a = forms.FloatField()
-	b = forms.FloatField()
-	c = forms.FloatField()
-	
+from quadratic.forms import QuadraticForm
 
 def calculate(request):
 	form = QuadraticForm()
 	return render(request, 'results.html', {'form': form})
-
+'''
 class Coefficient(object):
 	
 	def __init__(self, name, value):
@@ -35,7 +29,7 @@ class Coefficient(object):
 			self.error_message = "коэффициент при первом слагаемом уравнения не может быть равным нулю"
 			return False
 		return True
-
+'''
 
 def get_discr(a, b, c):
 	d = b**2 - 4*a*c
@@ -46,12 +40,13 @@ def get_eq_root(a, b, d, order=1):
 	if order == 1:
 		x = (-b + d**(1/2.0)) / 2*a
 	else:
-		x = (-b + d**(1/2.0)) / 2*a
+		x = (-b - d**(1/2.0)) / 2*a
 	return x
 
-
+'''
 def quadratic_results(request):
 	form = QuadraticForm()
+	print form.clean_a
 	context = {'error': False}
 	for name_value in ['a', 'b', 'c']:
 		coefficient = Coefficient(name_value, request.GET.get(name_value, ''))
@@ -80,4 +75,34 @@ def quadratic_results(request):
 		context.update({'d': 'Дискриминант: %d' %d, 'result_message': result_message})
 	context['form'] = form
 	return render(request, 'results.html', context)
+'''
+
+def quadratic_results(request):
+	
+	context = {}
+	form = QuadraticForm()
+	if request.method == 'GET':
+		form = QuadraticForm(request.GET)
+		if form.is_valid():
+			a = form.cleaned_data['a']
+			b = form.cleaned_data['b']
+			c = form.cleaned_data['c']
+			d = get_discr(a, b, c)
+
+			if d < 0:
+				result_message = "Дискриминант меньше нуля, квадратное уравнение не имеет действительных решений."
+			elif d == 0:
+				x = get_eq_root(a, b, d)
+				result_message = "Дискриминант равен нулю, квадратное уравнение имеет один действительный корень: x1 = x2 = {}" .format(x)
+			else:
+				x1 = get_eq_root(a, b, d)
+				x2 = get_eq_root(a, b, d, order=2)
+				result_message = "Квадратное уравнение имеет два действительных корня: x1 = {}, x2 = {}" .format(x1, x2)
+		
+			context.update({'d': 'Дискриминант: %d' %d, 'result_message': result_message})
+
+	return render(request, 'results.html', {'form': form, 'context': context})
+
+
+
 

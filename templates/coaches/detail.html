@@ -15,10 +15,11 @@
       <h1 class="top1">{{ coach.first_name }} {{ coach.last_name }}</h1>
 			<div class="jumbotron">
 				<div class="coach_img">
-					{% if coach.gender == "M"  %}
+					{% if coach.gender == "M" %}
 					<img src="{% static 'images/top2.png' %}" alt="..." class="img-circle">
 					{% else %}
-					<img src="{% static 'images/top1.png' %}" alt="..." class="img-circle">	{% endif %}
+					<img src="{% static 'images/top1.png' %}" alt="..." class="img-circle">
+          {% endif %}
 				</div>
 				<div class="panel panel-default">
           <!-- Default panel contents -->
@@ -26,7 +27,7 @@
           <table class="table">
             <tbody>
 							<tr>
-                <td>Дата рождения</td><td>{{ coach.date_of_birth }}</td>
+                <td>Дата рождения</td><td>{{ coach.date_of_birth|date:"d F, Y" }}</td>
 							</tr>
 							<tr>
 								<td>Адрес</td><td>{{ coach.address }}</td>
@@ -41,28 +42,18 @@
 								<td>Телефон</td><td>{{ coach.phone }}</td>
 							</tr>
 							<tr>
-								<td>Преподаватель на курсах</td>
-								<td>
-								{% for i in course %}
-								<a href="{% url 'courses:detail' i.id %}">{{ i.name }}</a>
-								студенты курса 
-								<a href="{% url 'students:list_view' %}?course_id={{ i.id }}">
-								<span class="glyphicon glyphicon-education" aria-hidden="true"></span>
-								</a><br>
-								{% endfor %}
-								</td>
+
+
+              {% include "coaches/include/inc_coach.html" with block_title="Преподаватель на курсах" course=course %}
+
+
 							</tr>
 							<tr>
-								<td>Ассистент на курсах</td>
-								<td>
-								{% for k in assist %}
-								<a href="{% url 'courses:detail' k.id %}">{{ k.name }}</a>
-		 						студенты курса 
-								<a href="{% url 'students:list_view' %}?course_id={{ k.id }}">
-								<span class="glyphicon glyphicon-education" aria-hidden="true"></span>
-								</a><br>
-								{% endfor %}
-								</td>
+
+
+              {% include "coaches/include/inc_coach.html" with block_title="Преподаватель на курсах" course=assist %}
+								
+
 							</tr>
 						</tbody>
           </table>

@@ -32,7 +32,7 @@
 							<li class="{% block contact_is_active %}{% endblock %}">
 							<a href="{% url 'contact' %}">Contacts</a></li>
 							<li class="{% block students_is_active %}{% endblock %}">
-							<a href="{% url 'students:list_view' %}">Students</a></li>
+							<a href="{% url 'students:list_view' %}{% block link_to_st %}{% endblock link_to_st %}">Students</a></li>
 							<li class="{% block calculate_is_active %}{% endblock %}">
 							<a href="{% url 'calculate' %}">Equation</a></li>
 		<!-- Оригинал -->
