@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*- 
 from django.shortcuts import render
 from quadratic.forms import QuadraticForm
-
+'''
 def calculate(request):
 	form = QuadraticForm()
 	return render(request, 'quadratic/results.html', {'form': form})
-
+'''
 '''
 class Coefficient(object):
 	
@@ -79,10 +79,8 @@ def quadratic_results(request):
 '''
 
 def quadratic_results(request):
-	
 	context = {}
-	form = QuadraticForm()
-	if request.method == 'GET':
+	if request.GET:
 		form = QuadraticForm(request.GET)
 		if form.is_valid():
 			a = form.cleaned_data['a']
@@ -101,7 +99,8 @@ def quadratic_results(request):
 				result_message = "Квадратное уравнение имеет два действительных корня: x1 = {}, x2 = {}" .format(x1, x2)
 		
 			context.update({'d': 'Дискриминант: %d' %d, 'result_message': result_message})
-
+	else:
+		form = QuadraticForm()
 	return render(request, 'quadratic/results.html', {'form': form, 'context': context})
 
 

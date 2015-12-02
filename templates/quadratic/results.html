@@ -38,7 +38,7 @@
 				<p>{{ result_message }}</p>
 <!--		<p>Введите параметры:</p> -->
 				{% endif %}
-				<form action="{% url 'calculate' %}">
+				<form action="{% url 'results' %}">
           {{ form.as_p }}
 					<input type="submit" value="Решить"/>
 				</form>
