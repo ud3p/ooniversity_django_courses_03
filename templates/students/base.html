@@ -16,15 +16,9 @@
 		<div class="page-header">
 			<h1 class="descr">Список всех студентов</h1>
 			<div class="jumbotron">
-				{% if messages %}
-				{% for message in messages %}
-				<div class="alert alert-success" role="alert">
-				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-				{{ message }}</div>
-				{% endfor %}
-				{% endif %}
+        {% include "students/include/inc_messages.html" %}
 				<p>
-					<a class="btn btn-primary btn-lg" href="{% url 'students:student_model' %}" role="button"><span class="glyphicon glyphicon-plus"></span> Добавть нового студента</a>
+					<a class="btn btn-primary btn-lg" href="{% url 'students:create' %}" role="button"><span class="glyphicon glyphicon-plus"></span> Добавть нового студента</a>
 				</p>
 				<div class="panel panel-default">
 					<!-- Default panel contents -->
@@ -37,7 +31,7 @@
 		            <th>Фамилия и имя</th>
 		            <th>Адрес</th>
 								<th>Skype</th>
-								<th>Курсы</th>
+								<th colspan="2">Курсы</th>
               </tr>
             </thead>
             {% endblock thead %}
@@ -54,6 +48,10 @@
 								<a href="{% url 'courses:detail' course.id %}">{{ course.name }}</a><br>
 								{% endfor %}
 								</td>
+                <td>
+                  <p><a class="btn btn-primary btn-block" href="{% url 'students:edit' student.id %}" role="button"><span class="glyphicon glyphicon-pencil"></span> Изменить</a></p>
+                  <p><a class="btn btn-primary btn-block" href="{% url 'students:remove' student.id %}" role="button"><span class="glyphicon glyphicon-remove"></span> Удалить</a></p>
+                </td>
 							</tr>
 							{% endfor %}
             </tbody>

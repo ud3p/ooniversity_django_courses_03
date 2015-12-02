@@ -207,7 +207,7 @@ table tbody tr td{
 }
 @media (min-width: 1200px) {
   .carousel, .carousel .item, .carousel-inner > .item > img {
-    height: 800px;
+    height: 900px;
   }
 }
 /* CUSTOMIZE THE NAVBAR

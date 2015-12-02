@@ -6,17 +6,45 @@ from django import forms
 from django.contrib import messages
 from students.forms import StudentModelForm
 
-def student_model(request):
+def create(request):
 	if request.method == 'POST':
 		form = StudentModelForm(request.POST)
 		if form.is_valid():
 			application = form.save()
-			mess = 'Student {} {} has been successfully added.' .format(application.surname, application.name)
+			mess = u'Student {} {} has been successfully added.' .format(application.surname, application.name)
 			messages.success(request, mess)
-			return redirect('..')
+			return redirect('students:list_view')
 	else:
 		form = StudentModelForm()
 	return render(request, 'students/add.html', {'form': form})
+
+
+def edit(request, pk):
+	application = Student.objects.get(id=pk)
+	if request.method == 'POST':
+		form = StudentModelForm(request.POST, instance=application)
+		if form.is_valid():
+			application = form.save()
+			messages.success(request, u'Info on the student has been sucessfully changed.')
+	else:
+		form = StudentModelForm(instance=application)
+	return render(request, 'students/edit.html', {'form': form})
+
+def remove(request, pk):
+    application = Student.objects.get(id=pk)
+    if request.method == 'POST':
+		application.delete()
+		mess = u'Info on {} {} has been sucessfully deleted.' .format(application.name, application.surname)
+		messages.success(request, mess)
+		return redirect('students:list_view')
+    return render(request, 'students/remove.html', {'full_name': application.name+ ' ' +application.surname}) 
+
+
+
+
+
+
+
 
 class StudentApplyForm(forms.Form):
 	name = forms.CharField(max_length=100)
