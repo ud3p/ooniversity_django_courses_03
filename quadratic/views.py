@@ -4,7 +4,8 @@ from quadratic.forms import QuadraticForm
 
 def calculate(request):
 	form = QuadraticForm()
-	return render(request, 'results.html', {'form': form})
+	return render(request, 'quadratic/results.html', {'form': form})
+
 '''
 class Coefficient(object):
 	
@@ -101,7 +102,7 @@ def quadratic_results(request):
 		
 			context.update({'d': 'Дискриминант: %d' %d, 'result_message': result_message})
 
-	return render(request, 'results.html', {'form': form, 'context': context})
+	return render(request, 'quadratic/results.html', {'form': form, 'context': context})
 
 
 
