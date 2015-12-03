@@ -102,7 +102,7 @@ def quadratic_results(request):
 			context.update({'d': 'Дискриминант: %d' %d, 'result_message': result_message})
 	else:
 		form = QuadraticForm()
-	return render(request, 'results.html', {'form': form, 'context': context})
+	return render(request, 'quadratic/results.html', {'form': form, 'context': context})
 
 
 
