@@ -1,26 +1,14 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
 from courses.models import Course, Lesson
 from courses.forms import CourseModelForm, LessonModelForm
-from django.contrib import messages
+from pybursa.utils import detail_view
 
-def detail(request, course_id):
-	#cour = Course.objects.get(id = course_id)
-	#lesn = Lesson.objects.filter(course = course_id)
-	#return render(request, 'courses/detail.html', {'course': cour, 'lesson': lesn})
-	return render(request, 'courses/detail.html', {'course': Course.objects.get(id = course_id)})
 
-def add(request):
-	if request.method == 'POST':
-		form = CourseModelForm(request.POST)
-		if form.is_valid():
-			application = form.save()
-			mess = u'Course {} has been successfully added.' .format(application.name)
-			messages.success(request, mess)
-			return redirect('index')
-	else:
-		form = CourseModelForm()
-	return render(request, 'courses/add.html', {'form': form})
+def detail(request, pk):
+    return detail_view(request, pk, Course)
+
 
 def add_lesson(request, pk):
 	if request.method == 'POST':
@@ -36,6 +24,35 @@ def add_lesson(request, pk):
 	return render(request, 'courses/add_lesson.html', {'form': form})
 
 
+def add_edit(request, pk=None):
+	if pk is None:
+		application = None
+	else:
+		application = get_object_or_404(Course, pk=pk)
+	if request.method == 'POST':
+		form = CourseModelForm(request.POST, instance=application)
+		if form.is_valid():
+			application = form.save()
+			messages.success(request, u'The changes have been saved.')
+			return redirect('courses:edit',  application.id)
+	else:
+		form = CourseModelForm(instance=application)
+	return render(request, 'courses/edit.html', {'form': form})
+
+
+def add(request):
+	if request.method == 'POST':
+		form = CourseModelForm(request.POST)
+		if form.is_valid():
+			application = form.save()
+			mess = u'Course {} has been successfully added.' .format(application.name)
+			messages.success(request, mess)
+			return redirect('index')
+	else:
+		form = CourseModelForm()
+	return render(request, 'courses/add.html', {'form': form})
+
+
 def edit(request, pk):
 	application = Course.objects.get(id=pk)
 	if request.method == 'POST':
@@ -47,6 +64,7 @@ def edit(request, pk):
 	else:
 		form = CourseModelForm(instance=application)
 	return render(request, 'courses/edit.html', {'form': form})
+
 
 def remove(request, pk):
     application = Course.objects.get(id=pk)
