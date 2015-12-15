@@ -2,4 +2,4 @@
 *.pyc
 *.pyos
 *~
-.log
+*.log
