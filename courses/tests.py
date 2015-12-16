@@ -148,3 +148,13 @@ class CoursesDetailTest(TestCase):
         #insert_course()
         response = self.client.get('/coaches/1/')
         self.assertEqual(response.status_code, 200)
+
+    def test_add_lesson(self):
+        response = self.client.get('/courses/1/add_lesson')
+        self.assertContains(response, 'Subject')
+        self.assertContains(response, 'Description')
+        self.assertContains(response, 'Course')
+        self.assertContains(response, 'Order')
+        
+
+
