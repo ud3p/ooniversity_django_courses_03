@@ -95,9 +95,11 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
-EMAIL_HOST = 'localhost'
-
-EMAIL_PORT = 1025
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = "smtp.mydomain@gmail.com"
+EMAIL_HOST_PASSWORD = 'qwerty15935728'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 ADMINS = (('ud3p', 'ud3p@mail.ru'),)
 

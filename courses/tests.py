@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.test import TestCase
 from students.models import Student
-from courses.models import Course
+from courses.models import Course, Lesson
 from coaches.models import Coach
 from django.contrib.auth.models import User
 from django.test import Client
@@ -79,7 +79,7 @@ class CoursesListTest(TestCase):
         #insert_course()
         self.assertEqual(Course.objects.all().count(), 3)
 
-    def test_page_c(self):
+    def test_page_course(self):
         #client = Client()
         #insert_course()
         response = self.client.get('/')
@@ -91,12 +91,12 @@ class CoursesListTest(TestCase):
         #client = Client()
         #insert_course()
         response = self.client.get('/')
+        self.assertContains(response, '/courses/add/')
         for i in range(1, 4):
-            self.assertContains(response, '/courses/add/')
             self.assertContains(response, '/courses/edit/{}/'.format(i))
             self.assertContains(response, '/courses/remove/{}/'.format(i))
     
-    def test_check_valid_add(self):
+    def test_check_valid_add_course(self):
         #client = Client()
         #insert_course()
         response = self.client.get('/courses/add/')
@@ -106,14 +106,14 @@ class CoursesListTest(TestCase):
         self.assertContains(response, 'Coach')
         self.assertContains(response, 'Assistant')
     
-    def test_check_valid_edit(self):
+    def test_check_valid_edit_course(self):
         #client = Client()
         #insert_course()
         response = self.client.get('/courses/edit/1/')
         self.assertContains(response, 'user_1')
         self.assertContains(response, 'user_3')
     
-    def test_check_valid_remove(self):
+    def test_check_valid_remove_course(self):
         #client = Client()
         #insert_course()
         for i in range(1, 4):
@@ -128,7 +128,7 @@ class CoursesDetailTest(TestCase):
         self.client = Client()
         insert_course()
 
-    def test_detail_page_c(self):
+    def test_detail_page_course(self):
         #client = Client()
         #response = self.client.get('/courses/1/')
         #self.assertEqual(response.status_code, 404)
@@ -148,19 +148,17 @@ class CoursesDetailTest(TestCase):
         #insert_course()
         response = self.client.get('/coaches/1/')
         self.assertEqual(response.status_code, 200)
-'''
+
     def test_add_lesson(self):
-        #response = self.client.get('/courses/1/add_lesson')
-        response = self.client.post('/courses/1/add_lesson', {'subject': 'test', 'description': 'test', 'course': 'Python/Django', 'Order': 4})
+        response = self.client.get('/courses/1/add_lesson')
         self.assertContains(response, 'Subject')
         self.assertContains(response, 'Description')
         self.assertContains(response, 'Course')
         self.assertContains(response, 'Order')
-        
-        
-        response = self.client.get('/courses/1/')
-        self.assertContains(response, '4')
-'''       
+        self.assertEqual(response.status_code, 200)
+        response = self.client.post('/courses/1/add_lesson', {'subject': 'test', 'description': 'test', 'course': 'Python/Django', 'order': 4})
+        self.assertEqual(response.status_code, 200)
+      
         
 
 
