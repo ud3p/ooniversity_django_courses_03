@@ -15,7 +15,7 @@ def insert_student():
                             address='ул. Пушкина, д. 57, кв. 137',
                             skype='test',
                             )
-    return new_student
+    
 # Create your tests here.
 class StudentsListTest(TestCase):
     def test_new_student(self):
@@ -28,6 +28,7 @@ class StudentsListTest(TestCase):
         response = client.get('/students/')
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'ул. Пушкина, д. 57, кв. 137')
+        self.assertTemplateUsed(response, 'students/student_list.html')
 
 class StudentsDetailTest(TestCase):
     def test_detail_page_s(self):
@@ -38,3 +39,4 @@ class StudentsDetailTest(TestCase):
         response = client.get('/students/1/')
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'test@test.com')
+        self.assertTemplateUsed(response, 'students/student_detail.html')
