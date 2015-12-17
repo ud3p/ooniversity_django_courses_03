@@ -115,7 +115,7 @@ LOGGING = {
         'students': {
             'handlers': ['student_handler'],
             'level': 'WARNING'
-        },
+        }
     },
     'handlers': {
         'course_handler': {
@@ -129,7 +129,7 @@ LOGGING = {
             'class': 'logging.FileHandler',
             'filename': os.path.join(BASE_DIR, 'students_logger.log'),
             'formatter': 'verbose'
-        },
+        }
     },
 
     'formatters': {
