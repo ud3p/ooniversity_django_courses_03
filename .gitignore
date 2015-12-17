@@ -3,3 +3,4 @@
 *.pyos
 *~
 *.log
+local_settings.py
