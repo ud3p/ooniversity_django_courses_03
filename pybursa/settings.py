@@ -149,3 +149,6 @@ try:
 except ImportError:
     print "Warning! local_settings are not defined!"
 '''
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_files/')
+
